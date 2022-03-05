@@ -89,6 +89,7 @@ const Controls = () => {
                         <Typography 
                             variant='h6' 
                             fontWeight={800}
+                            color='white'
                         >
                             Total: ₹ {totalAmount}
                         </Typography>  

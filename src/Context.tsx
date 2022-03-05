@@ -72,10 +72,10 @@ const Context = ({ children }: Props) => {
     const makeRegularBurger = () => {
         let burger: Array<number> = [];
         let amount: number = 0;
-        Ingredients.map((e, index) => {
+        for (let index = Ingredients.length - 1; index >= 0; index--) {
             burger.unshift(index);
             amount += Ingredients[index].price;
-        });
+        }
         setBurgerInfo([...burger]);
         setTotalAmount(amount);
     }
