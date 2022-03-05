@@ -13,7 +13,10 @@ interface Props {
         marginTop?: string | number, 
         marginRight?: string | number, 
         marginBottom?: string | number, 
-        marginLeft?: string | number 
+        marginLeft?: string | number,
+        paddingLeft?: string | number,
+        paddingRight?: string | number,
+        height?: string | number
     } 
 }
 

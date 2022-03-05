@@ -1,16 +1,23 @@
 import './App.css';
 import Header from './Components/Header';
-import { ThemeProvider } from '@mui/material';
-import theme from './Themes/Theme';
+import { ThemeProvider, Container, CssBaseline } from '@mui/material';
 import Content from './Components/Content';
-
-import 'fontsource-roboto';
+import { useContext } from 'react';
+import { State } from './Context';
 
 function App() {
+
+  const { theme } = useContext(State);
+
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Content />
+      <CssBaseline />
+      <Container maxWidth="xl" sx={{
+        padding: '0px !important',
+      }}>
+        <Header/>
+        <Content />
+      </Container>
     </ThemeProvider>
   );
 }

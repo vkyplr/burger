@@ -5,7 +5,7 @@ const Onion = styled(Box)({
     width: '70%',
     backgroundColor: '#B95381',
     borderRadius: '10px',
-    borderBottom: '5px solid #7E1846',
+    borderBottom: '3px solid #7E1846',
     marginTop: 7
 })
 

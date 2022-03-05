@@ -1,21 +1,23 @@
 import ColumnContainer from "../common/ColumnContainer";
-import BunBottom from "./ingredients/BunBottom";
-import BunTop from "./ingredients/BunTop";
-import Cheese from "./ingredients/Cheese";
-import Lettuce from "./ingredients/Lettuce";
-import Onion from "./ingredients/Onion";
-import Patty from "./ingredients/Patty";
-import Tomato from "./ingredients/Tomato";
+import ingredients, { BunTop, BunBottom } from "./ingredients";
+import { cloneElement, useContext } from "react";
+import { State } from "../../Context";
 
 const Burger = () => {
+
+    const { burgerInfo } = useContext(State);
+
     return (
-        <ColumnContainer style={{ marginTop: '50px' }}>
+        <ColumnContainer style={{ 
+            marginTop: '50px', 
+            paddingLeft: '0px !important', 
+            paddingRight: '0px !important' 
+        }}>
             <BunTop />
-            <Onion />
-            <Cheese />
-            <Tomato />
-            <Lettuce />
-            <Patty />
+            {
+                burgerInfo.length > 0 &&
+                burgerInfo.map((item, index) => cloneElement(ingredients[item], { key:  index}))
+            }
             <BunBottom />
         </ColumnContainer>
     )
