@@ -2,6 +2,7 @@ import ColumnContainer from "../common/ColumnContainer";
 import ingredients, { BunTop, BunBottom } from "./ingredients";
 import { cloneElement, useContext } from "react";
 import { State } from "../../Context";
+import { Typography } from "@mui/material";
 
 const Burger = () => {
 
@@ -15,8 +16,9 @@ const Burger = () => {
         }}>
             <BunTop />
             {
-                burgerInfo.length > 0 &&
-                burgerInfo.map((item, index) => cloneElement(ingredients[item], { key:  index}))
+                burgerInfo.length > 0 ?
+                burgerInfo.map((item, index) => cloneElement(ingredients[item], { key:  index})) :
+                <Typography variant='h4' marginY={1}>Add Ingredients</Typography>
             }
             <BunBottom />
         </ColumnContainer>
