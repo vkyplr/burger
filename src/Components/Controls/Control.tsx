@@ -26,7 +26,24 @@ const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) =
         >
             <Grid container justifyContent='space-between'>
                 <Grid item>
-                    <Typography variant='h4' fontWeight={600} color={grey[800]}>{name}</Typography>
+                    <Grid container alignItems='center'>
+                        <Typography 
+                            variant='h4' 
+                            fontWeight={600} 
+                            color={grey[800]}
+                            
+                        >
+                            {name}
+                        </Typography>
+                        <Typography 
+                            variant='italic'
+                            fontWeight={600} 
+                            color={grey[800]}
+                            marginLeft={1}
+                        >
+                            ₹{price}
+                        </Typography>
+                    </Grid>
                     <Grid container>
                         <Grid item>
                             <Button 

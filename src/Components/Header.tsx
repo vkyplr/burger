@@ -1,16 +1,15 @@
 import { useContext, useState } from 'react';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Brightness7, Brightness4 } from '@mui/icons-material';
-import { State, ContextInterface } from '../Context';
+import { observer } from 'mobx-react-lite';
+import BurgerStore from '../BurgerStore';
 
 const Header = () => {
-
-    const { switchTheme: changeTheme } = useContext<ContextInterface>(State);
 
     const [currentTheme, setCurrentTheme] = useState("theme2")
 
     const switchTheme = () => {
-        changeTheme(currentTheme == "theme2" ? "theme1" : "theme2");
+        BurgerStore.switchTheme(currentTheme == "theme2" ? "theme1" : "theme2");
         setCurrentTheme(currentTheme == "theme2" ? "theme1" : "theme2")
     }
 
@@ -38,4 +37,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default observer(Header);

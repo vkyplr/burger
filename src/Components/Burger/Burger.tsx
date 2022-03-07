@@ -1,13 +1,12 @@
 import ColumnContainer from "../common/ColumnContainer";
 import ingredients, { BunTop, BunBottom } from "./ingredients";
-import { cloneElement, useContext } from "react";
-import { State } from "../../Context";
+import { cloneElement } from "react";
 import { Typography } from "@mui/material";
+import BurgerStore from "../../BurgerStore";
+import { observer } from "mobx-react-lite";
 
 const Burger = () => {
-
-    const { burgerInfo } = useContext(State);
-
+    const { burgerInfo } = BurgerStore;
     return (
         <ColumnContainer style={{ 
             marginTop: '50px', 
@@ -25,4 +24,4 @@ const Burger = () => {
     )
 }
 
-export default Burger;
+export default observer(Burger);

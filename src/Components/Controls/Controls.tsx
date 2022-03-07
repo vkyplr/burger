@@ -1,11 +1,11 @@
 import { Typography, Paper, Button, Divider } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import useTheme from "@mui/material/styles/useTheme";
-import { useContext } from "react";
-import { State, Ingredients } from "../../Context";
 import ColumnContainer from "../common/ColumnContainer";
-
+import BurgerStore from "../../BurgerStore";
+import { Ingredients } from "../../BurgerStore";
 import Control from './Control';
+import { observer } from "mobx-react-lite";
+
 
 const Controls = () => {
     
@@ -17,7 +17,7 @@ const Controls = () => {
         addIngredient, 
         removeIngredient, 
         makeRegularBurger,
-    } = useContext(State);
+    } = BurgerStore;
 
     return (
         <ColumnContainer key='Controls' style={{
@@ -26,15 +26,7 @@ const Controls = () => {
             height: '100%'
         }}>
             <Button 
-                variant="contained"
-                sx={{
-                    backgroundColor: theme.controlsBackground.primary,
-                    ':hover': {
-                        backgroundColor: theme.controlsBackground.primary
-                    },
-                    color: grey[800],
-                    fontWeight: 700,
-                }}
+                variant="customVariant"
                 onClick={makeRegularBurger}
             >Regular Burger</Button>
             <Typography variant="h6" fontWeight={700} marginY={1}>Or Customize yourself</Typography>
@@ -62,14 +54,7 @@ const Controls = () => {
                 })}
                 {totalAmount > 0 &&
                     <Paper 
-                        sx={{
-                            width:'100%',
-                            padding: '15px',
-                            marginBottom: '1.6%',
-                            backgroundColor: 'transparent',
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}
+                        variant='transparent'
                         elevation={0}
                     >
                         <Button
@@ -100,4 +85,4 @@ const Controls = () => {
     )
 }
 
-export default Controls;
+export default observer(Controls);

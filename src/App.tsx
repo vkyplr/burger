@@ -2,12 +2,13 @@ import './App.css';
 import Header from './Components/Header';
 import { ThemeProvider, Container, CssBaseline } from '@mui/material';
 import Content from './Components/Content';
-import { useContext } from 'react';
-import { State } from './Context';
+import BurgerStore from './BurgerStore';
+import { observer } from 'mobx-react-lite';
 
-function App() {
 
-  const { theme } = useContext(State);
+const App = () => {
+  
+  const { theme } = BurgerStore;
 
   return (
     <ThemeProvider theme={theme}>
@@ -22,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
