@@ -1,22 +1,22 @@
-import { useContext, useState } from 'react';
+import { useState, useContext } from 'react';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Brightness7, Brightness4 } from '@mui/icons-material';
-import { observer } from 'mobx-react-lite';
-import BurgerStore from '../BurgerStore';
+import { RootStoreContext } from '../RootStoreContext';
 
 const Header = () => {
 
-    const [currentTheme, setCurrentTheme] = useState("theme2")
+    const [currentTheme, setCurrentTheme] = useState("theme2");
+    const { switchTheme: changeTheme } = useContext(RootStoreContext);
 
     const switchTheme = () => {
-        BurgerStore.switchTheme(currentTheme == "theme2" ? "theme1" : "theme2");
-        setCurrentTheme(currentTheme == "theme2" ? "theme1" : "theme2")
+        changeTheme(currentTheme === "theme2" ? "theme1" : "theme2");
+        setCurrentTheme(currentTheme === "theme2" ? "theme1" : "theme2")
     }
 
     return (
         <AppBar position="fixed">
             <Toolbar>
-                <img src="/logo.png" height="50" />
+                <img src="./logo.png" height="50" alt="Logo" />
                 <Typography 
                     sx={{ 
                         flexGrow: 1, 
@@ -28,7 +28,7 @@ const Header = () => {
                     Burger Maker
                 </Typography>
                 <IconButton onClick={switchTheme}>
-                    { currentTheme == "theme2" ? 
+                    { currentTheme === "theme2" ? 
                     <Brightness7 htmlColor='white' /> : 
                     <Brightness4 htmlColor='white' /> }
                 </IconButton>
@@ -37,4 +37,4 @@ const Header = () => {
     )
 }
 
-export default observer(Header);
+export default Header;

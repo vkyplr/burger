@@ -1,48 +1,32 @@
 import { Theme } from "@mui/material";
 import { action, makeObservable, observable } from "mobx";
-import { Theme1, Theme2 } from './Themes/Theme'
+import { Theme1, Theme2 } from '../Themes/Theme'
+import { Ingredients } from "../Components/common/Ingredients"
+import RootStore from "./RootStore";
 
-interface Ingredient {
-    name: string,
-    price: number
-}
+class BurgerStore {
 
-export const Ingredients: Array<Ingredient> = [
-    { name: 'Onion', price: 15 },
-    { name: 'Cheese', price: 20 },
-    { name: 'Tomato', price: 15 },
-    { name: 'Lettuce', price: 30 },
-    { name: 'Patty', price: 45 },
-]
+    burgerInfo: Array<number>;
+    totalAmount: number;
+    rootStore: RootStore;
 
-export class Store {
-
-    burgerInfo: Array<number> = [];
-    totalAmount: number = 0;
-    theme: Theme = Theme2;
-
-    constructor() {
+    constructor(rootStore: RootStore) {
+        this.burgerInfo = [];
+        this.totalAmount = 0;
+        this.rootStore =  rootStore;
         makeObservable(this, {
-            theme: observable,
             burgerInfo: observable,
             totalAmount: observable,
-            switchTheme: action,
             addIngredient: action,
             removeIngredient: action,
             clearBurger: action,
-            makeRegularBurger: action
+            makeRegularBurger: action,
+            setBurger: action
         })
     }
 
-    switchTheme = (theme: string) => {
-        switch (theme) {
-            case "theme1":
-                this.theme = Theme1;
-                break;
-            case "theme2":
-                this.theme = Theme2;
-                break;
-        }
+    setBurger = (info: Array<number>) => {
+        this.burgerInfo = info;
     }
 
     addIngredient = (ingredient: number) => {
@@ -71,7 +55,5 @@ export class Store {
         this.totalAmount = amount;
     }
 }
-
-const BurgerStore =  new Store();
 
 export default BurgerStore;

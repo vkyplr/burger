@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import BurgerApp from './RootStoreContext';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BurgerApp>
+      <App />
+    </BurgerApp>
   </React.StrictMode>,
   document.getElementById('root')
 );

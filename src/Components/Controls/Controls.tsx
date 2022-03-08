@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { Typography, Paper, Button, Divider } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import ColumnContainer from "../common/ColumnContainer";
-import BurgerStore from "../../BurgerStore";
-import { Ingredients } from "../../BurgerStore";
+import { Ingredients } from "../common/Ingredients";
+import { RootStoreContext } from '../../RootStoreContext';
 import Control from './Control';
 import { observer } from "mobx-react-lite";
 
@@ -10,6 +11,7 @@ import { observer } from "mobx-react-lite";
 const Controls = () => {
     
     const theme = useTheme();
+    const { burgerStore } = useContext(RootStoreContext)
     const { 
         burgerInfo, 
         totalAmount,
@@ -17,7 +19,7 @@ const Controls = () => {
         addIngredient, 
         removeIngredient, 
         makeRegularBurger,
-    } = BurgerStore;
+    } = burgerStore;
 
     return (
         <ColumnContainer key='Controls' style={{
@@ -28,7 +30,7 @@ const Controls = () => {
             <Button 
                 variant="customVariant"
                 onClick={makeRegularBurger}
-            >Regular Burger</Button>
+            >Make Regular Burger</Button>
             <Typography variant="h6" fontWeight={700} marginY={1}>Or Customize yourself</Typography>
             <Divider />
             <Paper 
