@@ -1,7 +1,5 @@
-import { Theme } from "@mui/material";
 import { action, makeObservable, observable } from "mobx";
-import { Theme1, Theme2 } from '../Themes/Theme'
-import { Ingredients } from "../Components/common/Ingredients"
+import { Ingredients } from "../constants/Ingredients"
 import RootStore from "./RootStore";
 
 class BurgerStore {

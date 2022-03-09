@@ -2,6 +2,7 @@ import Burger from "./Burger";
 import Customer from "./Customer";
 
 interface Order {
+    id?: number,
     customer: Customer,
     burger: Burger,
     totalAmount: number

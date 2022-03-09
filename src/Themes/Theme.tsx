@@ -6,13 +6,15 @@ declare module '@mui/material/styles' {
         controlsBackground: {
             primary: string
         },
-        redText?: string
+        redText?: string,
+        greyBg: string
     }
     interface ThemeOptions {
         controlsBackground?: {
             primary?: string
         },
-        redText?: string
+        redText?: string,
+        greyBg?: string
     }
     interface TypographyVariants {
         italic: React.CSSProperties
@@ -184,6 +186,7 @@ const Theme2 = createTheme({
             fontStyle: 'italic'
         }
     },
+    greyBg: '#181818'
 });
 
 export { Theme1, Theme2 };
