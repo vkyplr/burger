@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Typography, Paper, Button, Dialog, Box, FormControl, TextField, DialogContent, DialogActions, DialogTitle, Alert, AlertTitle, Snackbar } from "@mui/material";
+import { Typography, Paper, Button, Dialog, Box, TextField, DialogContent, DialogActions, DialogTitle, Alert, AlertTitle, Snackbar } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import ColumnContainer from "../common/ColumnContainer";
 import { Ingredients } from "../../constants/Ingredients";
@@ -28,14 +28,14 @@ const Controls = () => {
         addIngredient, 
         removeIngredient, 
         makeRegularBurger,
+        saveBurger,
     } = burgerStore;
     const { totalOrders, allOrders, addOrder } = orderStore;
     const { 
-        totalCustomers, 
-        getCustomerTotalAmount, 
+        totalCustomers,  
         addBurger,
         checkIfCustomerExists,
-        addCustomer
+        addCustomer,
     } = customerStore;
 
     const handleClose = () => {
@@ -45,9 +45,12 @@ const Controls = () => {
     }
 
     const handleSubmit = () => {
-        setCustomerNameError(customerName.length < 1);
-        setCustomerPhoneError(customerPhone.length < 1);
-        if (!customerNameError && !customerPhoneError) {
+        let customerNameErrorLocal = customerName.length < 1;
+        let customerPhoneErrorLocal = !(/^\d{10}$/.test(customerPhone));
+        setCustomerNameError(customerNameErrorLocal);
+        setCustomerPhoneError(customerPhoneErrorLocal);
+        if (customerNameErrorLocal === false && customerPhoneErrorLocal === false) {
+            clearBurger();
             let customer: boolean | Customer = checkIfCustomerExists(customerName, customerPhone);
             if (!customer) {
                 customer = addCustomer({
@@ -57,15 +60,19 @@ const Controls = () => {
                     burgers: []
                 })
             }
+            // Save new Burger into Burger Store
+            let burgerId = saveBurger(burgerInfo);
             addOrder({
                 id: totalOrders,
-                customer,
-                burger: { info: burgerInfo },
+                customerId: customer.id,
+                burgerId,
                 totalAmount
             });
+            // Add new Burger to Customer Store
+            addBurger(burgerId, customer.id);
             setSnackbarOpen(true);
+            setDialogOpen(false);
         }
-        setDialogOpen(false);
     }
 
     const handleSave = () => {
@@ -140,7 +147,7 @@ const Controls = () => {
                 </Paper>
             </ColumnContainer>
             <Dialog 
-                maxWidth='xs'
+                maxWidth='sm'
                 open={dialogOpen}
                 onClose={handleClose}
             >
@@ -163,7 +170,7 @@ const Controls = () => {
                         <TextField 
                             required={true}
                             error={customerNameError}
-                            helperText={customerNameError ? 'This field is required' : ''}
+                            helperText={customerNameError ? 'Invaid Name' : ''}
                             size='small'
                             label='Name' 
                             variant='outlined'
@@ -177,12 +184,13 @@ const Controls = () => {
                         <TextField 
                             required={true}
                             error={customerPhoneError}
-                            helperText={customerPhoneError ? 'This field is required' : ''}
+                            helperText={customerPhoneError ? 'Invalid Phone Number' : ''}
                             size='small'
                             label='Phone' 
                             variant='outlined'
                             onChange={(e) => setCustomerPhone(e.target.value)}
                             color='primary'
+                            type='tel'
                             sx={{
                                 borderColor: 'white'
                             }}
@@ -191,10 +199,16 @@ const Controls = () => {
                 </DialogContent>
                 <DialogActions >
                     <Button sx={{ fontWeight: 700 }} onClick={handleClose}>Close</Button>
-                    <Button sx={{ fontWeight: 700 }} onClick={handleSubmit}>Submit</Button>
+                    <Button 
+                        sx={{ fontWeight: 700 }} 
+                        onClick={handleSubmit}
+                        disabled={(!customerName.length || !customerPhone.length)}
+                    >
+                        Submit
+                    </Button>
                 </DialogActions>   
             </Dialog>
-            <Snackbar open={snackbarOpen} autoHideDuration={4000} onClose={handleSnackbarClose}>
+            <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSnackbarClose}>
                 <Alert onClose={handleSnackbarClose} variant='filled' severity='success' sx={{ width: '100%' }}>
                     <AlertTitle>Success</AlertTitle>
                     Order has Been Created Successfully

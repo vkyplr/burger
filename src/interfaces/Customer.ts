@@ -1,10 +1,8 @@
-import Burger from "./Burger";
-
 interface Customer {
-    id?: number,
-    name?: string,
-    phone?: string,
-    burgers?: Array<Burger>
+    id: number,
+    name: string,
+    phone: string,
+    burgers: Array<number>
 }
 
 export default Customer;

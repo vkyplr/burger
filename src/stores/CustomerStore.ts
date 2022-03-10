@@ -45,10 +45,10 @@ class CustomerStore {
             }
         }
         return total;
-    };
+    }
 
-    addBurger = (burger: Burger, customerId: number) => {
-        this.customers[customerId].burgers?.push(burger);
+    addBurger = (burgerId: number, customerId: number) => {
+        this.customers[customerId].burgers?.push(burgerId);
     }
 
 }

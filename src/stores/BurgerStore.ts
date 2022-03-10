@@ -1,10 +1,12 @@
 import { action, makeObservable, observable } from "mobx";
 import { Ingredients } from "../constants/Ingredients"
+import Burger from "../interfaces/Burger";
 import RootStore from "./RootStore";
 
 class BurgerStore {
 
     burgerInfo: Array<number>;
+    burgers: Array<Burger>;
     totalAmount: number;
     rootStore: RootStore;
 
@@ -12,15 +14,17 @@ class BurgerStore {
         this.burgerInfo = [];
         this.totalAmount = 0;
         this.rootStore =  rootStore;
+        this.burgers = [];
         makeObservable(this, {
             burgerInfo: observable,
             totalAmount: observable,
+            burgers: observable,
             addIngredient: action,
             removeIngredient: action,
             clearBurger: action,
             makeRegularBurger: action,
-            setBurger: action
-        })
+            setBurger: action,
+        });
     }
 
     setBurger = (info: Array<number>) => {
@@ -51,6 +55,14 @@ class BurgerStore {
         }
         this.burgerInfo = [...burger];
         this.totalAmount = amount;
+    }
+
+    saveBurger = (info: Array<number>) => {
+        this.burgers.push({
+            id: this.burgers.length,
+            info,
+        });
+        return this.burgers.length - 1;
     }
 }
 
