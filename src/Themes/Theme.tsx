@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import type {} from '@mui/x-data-grid/themeAugmentation';
 
 declare module '@mui/material/styles' {
     interface Theme {
@@ -101,7 +102,25 @@ const Theme1 = createTheme({
                     }
                 }
             ]
-        }
+        },
+        MuiDataGrid: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#db0007',
+                    color: 'white',
+                },
+                "columnHeader": {
+                    color: 'white'
+                }
+            }
+        },
+        MuiTablePagination: {
+            styleOverrides: {
+                root: {
+                    color: 'white'
+                }
+            }
+        },
     },
     controlsBackground: {
         primary: '#FEBD53'
@@ -175,7 +194,25 @@ const Theme2 = createTheme({
                     }
                 }
             ]
-        }
+        },
+        MuiDataGrid: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#db0007',
+                    color: 'white',
+                },
+                "columnHeader": {
+                    color: 'white'
+                }
+            }
+        },
+        MuiTablePagination: {
+            styleOverrides: {
+                root: {
+                    color: 'white'
+                }
+            }
+        },
     },
     controlsBackground: {
         primary: '#FEBD53'

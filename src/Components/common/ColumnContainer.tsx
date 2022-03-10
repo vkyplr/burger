@@ -16,7 +16,8 @@ interface Props {
         marginLeft?: string | number,
         paddingLeft?: string | number,
         paddingRight?: string | number,
-        height?: string | number
+        height?: string | number,
+        width?: string | number
     } 
 }
 

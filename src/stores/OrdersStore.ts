@@ -12,6 +12,7 @@ class OrderStore {
         makeObservable(this, {
             orders: observable,
             totalOrders: computed,
+            allOrders: computed,
             addOrder: action
         });
     }

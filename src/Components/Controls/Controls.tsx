@@ -1,5 +1,18 @@
 import { useContext, useState } from 'react';
-import { Typography, Paper, Button, Dialog, Box, TextField, DialogContent, DialogActions, DialogTitle, Alert, AlertTitle, Snackbar } from "@mui/material";
+import { 
+    Typography, 
+    Paper, 
+    Button, 
+    Dialog, 
+    Box, 
+    TextField, 
+    DialogContent, 
+    DialogActions, 
+    DialogTitle, 
+    Alert, 
+    AlertTitle, 
+    Snackbar 
+} from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import ColumnContainer from "../common/ColumnContainer";
 import { Ingredients } from "../../constants/Ingredients";
@@ -24,13 +37,14 @@ const Controls = () => {
     const { 
         burgerInfo, 
         totalAmount,
+        readonly,
         clearBurger, 
         addIngredient, 
         removeIngredient, 
         makeRegularBurger,
         saveBurger,
     } = burgerStore;
-    const { totalOrders, allOrders, addOrder } = orderStore;
+    const { totalOrders, addOrder } = orderStore;
     const { 
         totalCustomers,  
         addBurger,
@@ -63,10 +77,11 @@ const Controls = () => {
             // Save new Burger into Burger Store
             let burgerId = saveBurger(burgerInfo);
             addOrder({
-                id: totalOrders,
+                id: totalOrders + 1,
                 customerId: customer.id,
                 burgerId,
-                totalAmount
+                totalAmount,
+                date: new Date()
             });
             // Add new Burger to Customer Store
             addBurger(burgerId, customer.id);
@@ -93,8 +108,12 @@ const Controls = () => {
                     height: '100%'
                 }}
             >
-                <Button variant="customVariant" onClick={makeRegularBurger}>Make Regular Burger</Button>
-                <Typography variant="h6" fontWeight={700} marginY={1}>Or Customize yourself</Typography>
+                {   !readonly ?
+                    <>
+                        <Button variant="customVariant" onClick={makeRegularBurger}>Make Regular Burger</Button>
+                        <Typography variant="h6" fontWeight={700} marginY={1}>Or Customize yourself</Typography>
+                    </> : <Typography marginY={1} variant='h4'>Order Summary</Typography>
+                }
                 <Paper 
                     sx={{
                         width:'100%', 
@@ -114,6 +133,7 @@ const Controls = () => {
                             index={index}
                             quantity={quantity}
                             price={item.price}
+                            readonly={readonly}
                         />
                     })}
                     {totalAmount > 0 &&
@@ -127,14 +147,16 @@ const Controls = () => {
                                 onClick={clearBurger}
                                 size='small'
                             >
-                                Reset
+                                Clear
                             </Button> 
-                            <Button
-                                variant="contained"
-                                color='success'
-                                onClick={handleSave}
-                                size='small'
-                            >Save</Button> 
+                            {   !readonly &&
+                                <Button
+                                    variant="contained"
+                                    color='success'
+                                    onClick={handleSave}
+                                    size='small'
+                                >Save</Button> 
+                            }
                             <Typography 
                                 variant='h6' 
                                 fontWeight={800}

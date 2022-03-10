@@ -17,12 +17,17 @@ class CustomerStore {
             customers: observable,
             addCustomer: action,
             totalCustomers: computed,
+            allCustomers: computed,
             addBurger: action
         })
     }
 
     get totalCustomers () {
         return this.customers.length;
+    }
+
+    get allCustomers () {
+        return this.customers;
     }
 
     checkIfCustomerExists = (name: string, phone: string) => {

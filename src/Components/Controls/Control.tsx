@@ -9,9 +9,10 @@ interface Props {
     name: string,
     quantity: number,
     price: number,
+    readonly: boolean
 }
 
-const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) => {
+const Control = ({ addItem, index, name, quantity, removeItem, price, readonly }: Props) => {
     const theme = useTheme();
     return (
         <Paper 
@@ -45,6 +46,12 @@ const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) =
                         </Typography>
                     </Grid>
                     <Grid container>
+                        {readonly ? 
+                        <Typography
+                            variant='h5' 
+                            color={grey[800]}
+                            fontWeight={600}
+                        >Quantity:</Typography> : 
                         <Grid item>
                             <Button 
                                 size='small' 
@@ -55,7 +62,7 @@ const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) =
                             >
                                 Remove
                             </Button>
-                        </Grid>
+                        </Grid>}
                         <Grid item>
                             <Typography 
                                 marginX={1} 
@@ -66,7 +73,7 @@ const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) =
                                 {quantity}
                             </Typography>
                         </Grid>
-                        <Grid item>
+                        {!readonly && <Grid item>
                             <Button 
                                 size='small' 
                                 variant='contained' 
@@ -75,7 +82,7 @@ const Control = ({ addItem, index, name, quantity, removeItem, price }: Props) =
                             >
                                 Add
                             </Button>
-                        </Grid>
+                        </Grid>}
                     </Grid>
                 </Grid>
                 { quantity > 0 && 
