@@ -1,6 +1,4 @@
 import { createContext, ReactNode, useMemo } from 'react';
-import BurgerStore from './stores/BurgerStore';
-import OrderStore from './stores/OrdersStore';
 import RootStore from './stores/RootStore';
 
 export const RootStoreContext = createContext<RootStore>(new RootStore());

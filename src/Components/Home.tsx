@@ -13,10 +13,14 @@ const ItemGrid = styled(Grid)({
     justifyContent: 'center',
 });
 
-const Content = () => {
+
+const Home = () => {
     return (
         <ContainerGrid container minHeight='calc(100vh - 64px)'>
-            <ItemGrid sx={{ height: 'calc(50vh + 64px)' }} item lg={4} md={4} sm={12} xs={12}>
+            <ItemGrid
+                // sx={{ height: 'calc(60vh + 64px)' }} 
+                item lg={4} md={4} sm={12} xs={12}
+            >
                 <OrderTable />
             </ItemGrid>
             <ItemGrid item lg={4} md={4} sm={12} xs={12}>
@@ -29,4 +33,4 @@ const Content = () => {
     )
 }
 
-export default Content;
+export default Home;

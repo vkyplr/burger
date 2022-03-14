@@ -1,5 +1,4 @@
 import { observable, action, makeObservable, computed } from 'mobx'
-import { computedFn } from 'mobx-utils';
 import Burger from '../interfaces/Burger';
 import Customer from '../interfaces/Customer';
 import RootStore from './RootStore';
@@ -22,17 +21,18 @@ class CustomerStore {
         })
     }
 
-    get totalCustomers () {
+    get totalCustomers() {
         return this.customers.length;
     }
 
-    get allCustomers () {
+    get allCustomers() {
         return this.customers;
     }
 
     checkIfCustomerExists = (name: string, phone: string) => {
         let customers = [...this.customers];
         let filtered = customers.filter(e => (e.name === name && e.phone === phone))
+        console.log(filtered)
         return (filtered.length) ? filtered[0] : false;
     }
 
@@ -55,7 +55,6 @@ class CustomerStore {
     addBurger = (burgerId: number, customerId: number) => {
         this.customers[customerId].burgers?.push(burgerId);
     }
-
 }
 
 export default CustomerStore;

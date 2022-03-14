@@ -58,6 +58,13 @@ const Theme1 = createTheme({
         },
     },
     components: {
+        MuiList: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'orange',
+                }
+            }
+        },
         MuiPaper: {
             variants: [
                 {
@@ -150,6 +157,13 @@ const Theme2 = createTheme({
         },
     },
     components: {
+        MuiList: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'orange',
+                }
+            }
+        },
         MuiPaper: {
             variants: [
                 {

@@ -13,6 +13,7 @@ class OrderStore {
             orders: observable,
             totalOrders: computed,
             allOrders: computed,
+            totalEarnings: computed,
             addOrder: action
         });
     }
@@ -26,6 +27,12 @@ class OrderStore {
     }
 
     addOrder = (order: Order) => this.orders.push(order);
+
+    get totalEarnings() {
+        let totalEarnings = 0;
+        this.orders.map(e => totalEarnings += e.totalAmount);
+        return totalEarnings;
+    }
 }
 
 export default OrderStore;
