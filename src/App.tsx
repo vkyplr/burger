@@ -7,28 +7,30 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home';
 import Customers from './Components/Customers';
+import TabLayout from './Components/TabLayout';
 
 const App = () => {
-  
-  const { theme } = useContext(RootStoreContext);
+
+	const { theme } = useContext(RootStoreContext);
 
 	return (
-		
+
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-				<Container maxWidth="xl" sx={{
-					padding: '0px !important',
-				}}>
-					<Router>
-						<Header/>
-						<Routes>
-							<Route path='/' element={<Home />} />
-							<Route path='customers' element={<Customers />} />
-						</Routes>
-					</Router>
-				</Container>
+			<Container maxWidth="xl" sx={{
+				padding: '0px !important',
+			}}>
+				<Router>
+					<Header />
+					<Routes>
+						<Route path='/' element={<TabLayout />} />
+						<Route path='/home' element={<Home />} />
+						<Route path='customers' element={<Customers />} />
+					</Routes>
+				</Router>
+			</Container>
 		</ThemeProvider>
-		
+
 	);
 }
 
